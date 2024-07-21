@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class PanierAddResquest {
 
-    private Long id;
+    private Long panierId;
     private Long produitId;
     private int quantity;
 }

@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class PanierController {
     @Autowired
     private PanierService panierService;
-    @PostMapping("/items/add")
-    public ResponseEntity<Panier> addItemToPannier(@RequestBody PanierAddResquest panierAddResquest) {
-        Panier updatedPanier = panierService.addItemToPanier(panierAddResquest.getId(), panierAddResquest.getProduitId(), panierAddResquest.getQuantity());
-        return updatedPanier != null ? ResponseEntity.ok(updatedPanier) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @PostMapping("/addItem")
+    public ResponseEntity<Panier> addItemToPanier(@RequestBody PanierAddResquest request) {
+        Panier panier = panierService.addItemToPanier(request.getPanierId(), request.getProduitId(), request.getQuantity());
+        if (panier != null) {
+            return ResponseEntity.ok(panier);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
     @PostMapping
     public ResponseEntity<Panier> createPanier(@RequestBody Panier panier) {

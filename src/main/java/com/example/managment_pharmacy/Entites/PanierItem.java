@@ -1,5 +1,6 @@
 package com.example.managment_pharmacy.Entites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +16,13 @@ public class PanierItem {
 
     @ManyToOne
     @JoinColumn(name = "produit_id")
+    @JsonBackReference//add last
     private Produit produit;
 
 
     @ManyToOne
     @JoinColumn(name = "panier_id")
+    @JsonBackReference//add last
     private Panier panier;
 
     private int quantity;

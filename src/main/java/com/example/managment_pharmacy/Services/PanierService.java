@@ -18,6 +18,10 @@ public class PanierService {
     @Autowired
     private PanierRepository panierRepository;
     public Panier addItemToPanier(Long panierId, Long produitId, int quantity) {
+        if (panierId == null || produitId == null) {
+            throw new IllegalArgumentException("The given id must not be null");
+        }
+
         Optional<Panier> optionalPannier = panierRepository.findById(panierId);
         Optional<Produit> optionalProduct = produitRepository.findById(produitId);
 

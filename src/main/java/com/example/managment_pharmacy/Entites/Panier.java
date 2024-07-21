@@ -1,5 +1,6 @@
 package com.example.managment_pharmacy.Entites;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +20,6 @@ public class Panier {
     private User user;
 
     @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
+    @JsonManagedReference//add last
     private List<PanierItem> items;
 }
