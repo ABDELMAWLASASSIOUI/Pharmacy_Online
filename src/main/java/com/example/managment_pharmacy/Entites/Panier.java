@@ -22,6 +22,9 @@ public class Panier {
     @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
     @JsonManagedReference//add last
     private List<PanierItem> items;
+    public double getTotalPrice() {
+        return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
+    }
 /*
     @OneToMany(mappedBy = "panier")
     private List<Produit> produits;

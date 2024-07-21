@@ -6,12 +6,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
-=======
-import java.util.Set;
->>>>>>> 1c21c04f5295479d10d84a1a6506fc5c782c24b4
+
 
 @Getter
 @Setter
@@ -45,10 +43,9 @@ public class Produit {
     private Set<PanierItem> itemSet;
 
     */
-<<<<<<< HEAD
+
     @OneToMany(mappedBy = "produit")
     private List<PanierItem> cartItems;
-=======
->>>>>>> 1c21c04f5295479d10d84a1a6506fc5c782c24b4
+
 
 }

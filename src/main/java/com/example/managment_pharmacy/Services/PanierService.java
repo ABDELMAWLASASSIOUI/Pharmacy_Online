@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class PanierService {
@@ -65,9 +66,23 @@ public Panier removeItemById(Long itemId) {
     } else {
         throw new RuntimeException("Article non trouvé");
     }
+
 }
 
+    private static final Logger logger = Logger.getLogger(PanierService.class.getName());
 
+    public double calculerTotalPrixPanier(Long panierId) {
+        Optional<Panier> optionalPanier = panierRepository.findById(panierId);
+        if (optionalPanier.isPresent()) {
+            Panier panier = optionalPanier.get();
+            double totalPrice = panier.getTotalPrice();
+            logger.info("Total price for Panier ID " + panierId + " is " + totalPrice);
+            return totalPrice;
+        } else {
+            logger.warning("Panier ID " + panierId + " not found.");
+            return 0.0;
+        }
+    }
     /*
     public Panier removeItemFromPanier(Long panierId, Long produitId) {
         Optional<Panier> optionalPanier = panierRepository.findById(panierId);

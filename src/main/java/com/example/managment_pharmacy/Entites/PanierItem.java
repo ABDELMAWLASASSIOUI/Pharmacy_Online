@@ -26,4 +26,7 @@ public class PanierItem {
     private Panier panier;
 
     private int quantity;
+    public double getTotalPrice() {
+        return produit.getPrice() * quantity;
+    }
 }

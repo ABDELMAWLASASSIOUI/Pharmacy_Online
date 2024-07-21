@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.logging.Logger;
+
 @RestController
 @RequestMapping("/api")
 public class PanierController {
@@ -31,6 +33,15 @@ public class PanierController {
     @DeleteMapping("/removeItem/{itemId}")
     public Panier removeItemFromPanier(@PathVariable Long itemId) {
         return panierService.removeItemById(itemId);
+    }
+    private static final Logger logger = Logger.getLogger(PanierController.class.getName());
+
+    @GetMapping("/{id}/total")
+    public ResponseEntity<Double> getTotalPrice(@PathVariable Long id) {
+        logger.info("Calculating total price for Panier ID " + id);
+        double totalPrice = panierService.calculerTotalPrixPanier(id);
+        logger.info("Total price for Panier ID " + id + " is " + totalPrice);
+        return ResponseEntity.ok(totalPrice);
     }
 /*
     @DeleteMapping("/deleteItem")
