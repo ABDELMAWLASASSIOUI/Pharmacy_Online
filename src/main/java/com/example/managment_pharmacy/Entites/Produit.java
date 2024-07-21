@@ -6,11 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-<<<<<<< HEAD
 import java.util.Set;
 
-=======
->>>>>>> 054545baf9b609b6c3502655cfc84ab77bd45379
 @Getter
 @Setter
 @Entity
@@ -38,6 +35,5 @@ public class Produit {
     private Set<PanierItem> itemSet;
 
     */
-=======
->>>>>>> 054545baf9b609b6c3502655cfc84ab77bd45379
+
 }
