@@ -27,4 +27,26 @@ public class PanierController {
         Panier createdPanier = panierService.createPanier(panier);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPanier);
     }
+
+    @DeleteMapping("/removeItem/{itemId}")
+    public Panier removeItemFromPanier(@PathVariable Long itemId) {
+        return panierService.removeItemById(itemId);
+    }
+/*
+    @DeleteMapping("/deleteItem")
+    public ResponseEntity<Panier> removeItemFromPanier(@RequestBody PanierAddResquest panierAddResquest) {
+        Panier updatedPanier = panierService.removeItemFromPanier(panierAddResquest.getPanierId(), panierAddResquest.getProduitId());
+        return updatedPanier != null ? ResponseEntity.ok(updatedPanier) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+ */
+    /*
+    @GetMapping("/totalPrice/{panierId}")
+    public ResponseEntity<Double> getTotalPrice(@PathVariable Long panierId) {
+        Double totalPrice = panierService.calculateTotalPrice(panierId);
+        return totalPrice != null ? ResponseEntity.ok(totalPrice) : ResponseEntity.notFound().build();
+    }
+
+
+     */
 }

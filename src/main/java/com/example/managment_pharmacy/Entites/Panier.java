@@ -22,4 +22,9 @@ public class Panier {
     @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
     @JsonManagedReference//add last
     private List<PanierItem> items;
+/*
+    @OneToMany(mappedBy = "panier")
+    private List<Produit> produits;
+
+ */
 }
