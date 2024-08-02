@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 public class PanierController {
     @Autowired
     private PanierService panierService;
+    /*
     @PostMapping("/addItem")
     public ResponseEntity<Panier> addItemToPanier(@RequestBody PanierAddResquest request) {
         Panier panier = panierService.addItemToPanier(request.getPanierId(), request.getProduitId(), request.getQuantity());
@@ -24,15 +25,39 @@ public class PanierController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+     */
+
+    @PostMapping("/addItem")
+    public ResponseEntity<String> addItemToPanier(@RequestBody PanierAddResquest request) {
+        Panier panier = panierService.addItemToPanier(request.getPanierId(), request.getProduitId(), request.getQuantity());
+        if (panier != null) {
+            return ResponseEntity.ok("L'article a été ajouté au panier avec succès.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le panier ou le produit n'a pas été trouvé.");
+        }
+    }
     @PostMapping
     public ResponseEntity<Panier> createPanier(@RequestBody Panier panier) {
         Panier createdPanier = panierService.createPanier(panier);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPanier);
     }
 
+    /*
     @DeleteMapping("/removeItem/{itemId}")
     public Panier removeItemFromPanier(@PathVariable Long itemId) {
         return panierService.removeItemById(itemId);
+    }
+
+     */
+    @DeleteMapping("/removeItem/{itemId}")
+    public ResponseEntity<String> removeItemFromPanier(@PathVariable Long itemId) {
+        try {
+            Panier panier = panierService.removeItemById(itemId);
+            return ResponseEntity.ok("L'article a été supprimé du panier avec succès.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
     private static final Logger logger = Logger.getLogger(PanierController.class.getName());
 
